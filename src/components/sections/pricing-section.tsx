@@ -32,7 +32,7 @@ export function PricingSection() {
             transition={{ delay: 0.3 }}
           >
             <p className="font-serif text-white text-2xl md:text-4xl italic">
-              Константин & Ангелина
+              Константин и Ангелина
             </p>
             <p className="text-white/70 text-sm mt-2 tracking-widest uppercase">17 · 07 · 2026</p>
           </motion.div>

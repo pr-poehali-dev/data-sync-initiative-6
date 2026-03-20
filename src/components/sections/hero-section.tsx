@@ -46,7 +46,7 @@ export function HeroSection() {
             transition={{ duration: 1, delay: 1 }}
           >
             <p className="font-serif text-3xl md:text-4xl italic tracking-wide">
-              Константин + Ангелина
+              Константин и Ангелина
             </p>
           </motion.div>
         </div>
