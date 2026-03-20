@@ -96,7 +96,7 @@ export function FeaturesSection() {
           viewport={{ once: true }}
         >
           <iframe
-            src="https://yandex.ru/map-widget/v1/?ll=73.397&spn=0.02,0.01&text=%D0%A1%D1%83%D1%80%D0%B3%D1%83%D1%82%2C+%D0%9D%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D1%8B%D0%B9+%D0%BF%D1%80%D0%BE%D1%81%D0%BF.+13%2F1&z=16&pt=73.397,61.25,pm2rdm"
+            src="https://yandex.ru/map-widget/v1/?ll=73.461540,61.257400&z=16&pt=73.461540,61.257400,pm2rdm&text=%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD+Plum%2C+%D0%A1%D1%83%D1%80%D0%B3%D1%83%D1%82"
             width="100%"
             height="400"
             style={{ border: 0 }}
