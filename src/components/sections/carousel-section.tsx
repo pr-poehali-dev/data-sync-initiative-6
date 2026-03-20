@@ -53,7 +53,6 @@ export function CarouselSection() {
                 className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${color.bg} shadow-md border-2 border-white/50`}
                 style={{ backgroundColor: color.hex }}
               />
-              <span className="text-primary-foreground/80 text-xs text-center">{color.name}</span>
             </motion.div>
           ))}
         </div>
