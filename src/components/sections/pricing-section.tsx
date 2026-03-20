@@ -19,7 +19,7 @@ export function PricingSection() {
           style={{ scale, opacity }}
         >
           <img
-            src="/Mbavt7_5Q7uii6AY5oqp1CCLkErmXA5FGPIIxFw_58b5M23L0_I0VHT8xyxeBnmL3HJsnXzUdhcYl1c_vkiECOsY.jpg"
+            src="https://cdn.poehali.dev/projects/03270784-03ee-44e5-a324-16581e5bae48/bucket/6b5c9a16-bd51-4517-aaac-e1babfb7ef71.jpg"
             alt="Константин и Ангелина"
             className="w-full h-auto object-cover"
           />

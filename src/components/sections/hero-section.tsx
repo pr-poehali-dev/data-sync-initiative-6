@@ -33,7 +33,7 @@ export function HeroSection() {
       >
         <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
           <img
-            src="/m_ll8AJ6rcqAPiwHODYtHKbQ31fGOy1fI2KBiCURQfwvLK7t4B0OmsHI2A0cu0avmBm1xCONR4g-YFFhWI-SqEPI.jpg"
+            src="https://cdn.poehali.dev/projects/03270784-03ee-44e5-a324-16581e5bae48/bucket/f2037c18-998b-4136-bb03-b77286fb2096.jpg"
             alt="Константин и Ангелина"
             className="w-full h-full object-cover"
           />
