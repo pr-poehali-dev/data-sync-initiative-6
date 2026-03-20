@@ -72,8 +72,8 @@ export function FeaturesSection() {
         {/* Фотографии ресторана */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {[
-            "/interior-design-minimalist-living-room-natural-lig.jpg",
-            "/architecture-firm-website-minimal.jpg",
+            "https://cdn.poehali.dev/projects/03270784-03ee-44e5-a324-16581e5bae48/bucket/1cdda1d8-843b-430e-9131-d4cb17fb9a9d.jpg",
+            "https://cdn.poehali.dev/files/75a5b92b-77de-4da6-9b6e-b19bfb2f1670.jpg",
           ].map((src, i) => (
             <motion.div
               key={i}
