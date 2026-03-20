@@ -30,12 +30,12 @@ export function ManifestoSection() {
           Дорогие гости
         </motion.p>
 
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif leading-relaxed text-center text-foreground/10">
+        <h2 className="text-xl md:text-2xl font-serif italic leading-relaxed text-center text-foreground/10">
           Этим летом состоится очень важное для нас событие — наша свадьба. И этот день мы не можем представить без вас!
         </h2>
 
         <motion.h2
-          className="absolute inset-0 text-3xl md:text-5xl lg:text-6xl font-serif leading-relaxed text-center bg-gradient-to-r from-primary via-rose-400 to-primary bg-clip-text text-transparent"
+          className="absolute inset-0 text-xl md:text-2xl font-serif italic leading-relaxed text-center bg-gradient-to-r from-primary via-rose-400 to-primary bg-clip-text text-transparent"
           style={{ clipPath }}
         >
           Этим летом состоится очень важное для нас событие — наша свадьба. И этот день мы не можем представить без вас!
