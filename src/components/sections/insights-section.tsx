@@ -8,14 +8,6 @@ export function InsightsSection() {
   return (
     <section className="bg-background px-6 py-24">
       <div className="max-w-2xl mx-auto text-center">
-        <motion.p
-          className="text-muted-foreground text-sm uppercase tracking-widest mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Просьба ответить до 01.06.2026
-        </motion.p>
         <motion.h2
           className="font-serif text-3xl md:text-5xl text-foreground mb-4"
           initial={{ opacity: 0, y: 20 }}
