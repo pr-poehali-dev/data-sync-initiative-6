@@ -56,7 +56,7 @@ export function CarouselSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-primary-foreground text-sm uppercase tracking-widest mb-6">Пожелания</p>
+          <p className="text-primary-foreground text-2xl md:text-3xl font-serif mb-6">Пожелания</p>
           <p className="text-primary-foreground/90 font-serif text-xl md:text-2xl leading-relaxed mb-8">
             Чтобы наши руки были свободны для объятий, будем рады подаркам в конвертах.
           </p>
