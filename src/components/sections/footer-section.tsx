@@ -37,17 +37,7 @@ export function FooterSection() {
           г. Сургут · Ресторан Plum · Набережный просп., 13/1
         </motion.p>
 
-        <motion.div
-          className="pt-8 border-t border-border"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <p className="text-muted-foreground text-sm">
-            С любовью, Константин и Ангелина · 2026
-          </p>
-        </motion.div>
+
       </div>
     </footer>
   )
