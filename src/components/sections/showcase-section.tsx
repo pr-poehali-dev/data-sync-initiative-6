@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import Icon from "@/components/ui/icon"
 
 const schedule = [
-  { time: "12:35", title: "Сбор гостей", icon: "Users" },
+  { time: "12:35", title: "Сбор гостей возле ЗАГСа", icon: "Users" },
   { time: "13:05", title: "Регистрация в ЗАГС", icon: "Heart" },
   { time: "14:00", title: 'Фотосессия в парке "Кедровый лог"', icon: "Camera" },
   { time: "16:00", title: "Фуршет", icon: "Wine" },
@@ -28,7 +28,7 @@ export function ShowcaseSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Программа вечера
+          Программа торжества
         </motion.h2>
 
         <div className="relative">
