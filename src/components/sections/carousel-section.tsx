@@ -13,14 +13,6 @@ export function CarouselSection() {
   return (
     <section className="bg-primary py-24 overflow-hidden">
       <div className="max-w-4xl mx-auto px-6">
-        <motion.p
-          className="text-primary-foreground/70 text-sm uppercase tracking-widest mb-4 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          Пожелание
-        </motion.p>
         <motion.h2
           className="text-3xl md:text-5xl font-serif text-primary-foreground text-center mb-4"
           initial={{ opacity: 0, y: 20 }}
@@ -68,10 +60,6 @@ export function CarouselSection() {
           <p className="text-primary-foreground/90 font-serif text-xl md:text-2xl leading-relaxed mb-8">
             Чтобы наши руки были свободны для объятий, будем рады подаркам в конвертах.
           </p>
-          <div className="flex justify-center gap-1 mb-8 text-3xl">
-            <span>💗</span>
-            <span className="text-2xl">💕</span>
-          </div>
           <p className="text-primary-foreground/80 font-light">
             Будем благодарны вам за сохранение уютного семейного вечера и отсутствия криков «Горько!»
           </p>
