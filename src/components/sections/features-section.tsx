@@ -1,155 +1,109 @@
-import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import Icon from "@/components/ui/icon"
 
-function TypeTester() {
-  const [scale, setScale] = useState(1)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setScale((prev) => (prev === 1 ? 1.5 : 1))
-    }, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div className="flex items-center justify-center h-full">
-      <motion.span
-        className="font-serif text-6xl md:text-8xl text-foreground"
-        animate={{ scale }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        Aa
-      </motion.span>
-    </div>
-  )
-}
-
-function LayoutAnimation() {
-  const [layout, setLayout] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLayout((prev) => (prev + 1) % 3)
-    }, 2500)
-    return () => clearInterval(interval)
-  }, [])
-
-  const layouts = ["grid-cols-2 grid-rows-2", "grid-cols-3 grid-rows-1", "grid-cols-1 grid-rows-3"]
-
-  return (
-    <div className="h-full p-4 flex items-center justify-center">
-      <motion.div className={`grid ${layouts[layout]} gap-2 w-full max-w-[140px]`} layout>
-        {[1, 2, 3].map((i) => (
-          <motion.div
-            key={i}
-            className="bg-primary/20 rounded-md min-h-[30px]"
-            layout
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          />
-        ))}
-      </motion.div>
-    </div>
-  )
-}
-
-function SpeedIndicator() {
-  const [progress, setProgress] = useState(0)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setProgress(100), 500)
-    return () => clearTimeout(timeout)
-  }, [])
-
-  return (
-    <div className="flex flex-col items-center justify-center h-full gap-4">
-      <span className="text-3xl md:text-4xl font-sans font-medium text-foreground">100ms</span>
-      <span className="text-sm text-muted-foreground">Загрузка</span>
-      <div className="w-full max-w-[120px] h-1.5 bg-foreground/10 rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-primary rounded-full"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.1 }}
-        />
-      </div>
-    </div>
-  )
-}
+const calendarDays = Array.from({ length: 31 }, (_, i) => i + 1)
+const firstDayOffset = 2 // July 2026 starts on Wednesday (offset 2 for Mon-based grid)
 
 export function FeaturesSection() {
   return (
-    <section className="bg-background px-6 py-24">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-secondary px-6 py-24">
+      <div className="max-w-5xl mx-auto">
         <motion.p
-          className="text-muted-foreground text-sm uppercase tracking-widest mb-8"
+          className="text-muted-foreground text-sm uppercase tracking-widest mb-8 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Возможности
+          Дата торжества
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Typography Card */}
-          <motion.div
-            className="bg-secondary rounded-xl p-8 min-h-[280px] flex flex-col"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.96 }}
-            transition={{ duration: 0.2 }}
-            data-clickable
-          >
-            <div className="flex-1">
-              <TypeTester />
-            </div>
-            <div className="mt-4">
-              <h3 className="font-serif text-xl text-foreground">Типографика</h3>
-              <p className="text-muted-foreground text-sm mt-1">Красивые шрифты, которые идеально масштабируются.</p>
-            </div>
-          </motion.div>
+        {/* Мини-календарь июль */}
+        <motion.div
+          className="bg-background rounded-3xl p-8 max-w-sm mx-auto shadow-sm mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-6">
+            <p className="font-serif text-2xl text-foreground">Июль 2026</p>
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-center mb-2">
+            {["Пн","Вт","Ср","Чт","Пт","Сб","Вс"].map(d => (
+              <div key={d} className="text-xs text-muted-foreground py-1">{d}</div>
+            ))}
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-center">
+            {Array.from({ length: firstDayOffset }).map((_, i) => (
+              <div key={`e-${i}`} />
+            ))}
+            {calendarDays.map((day) => (
+              <div
+                key={day}
+                className={`relative w-8 h-8 mx-auto flex items-center justify-center text-sm rounded-full
+                  ${day === 17
+                    ? "bg-primary text-primary-foreground font-semibold"
+                    : "text-foreground hover:bg-accent/30"
+                  }`}
+              >
+                {day}
+                {day === 17 && (
+                  <span className="absolute -top-2 -right-2 text-base">🤍</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
-          {/* Layouts Card */}
-          <motion.div
-            className="bg-secondary rounded-xl p-8 min-h-[280px] flex flex-col"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.96 }}
-            data-clickable
-          >
-            <div className="flex-1">
-              <LayoutAnimation />
-            </div>
-            <div className="mt-4">
-              <h3 className="font-serif text-xl text-foreground">Макеты</h3>
-              <p className="text-muted-foreground text-sm mt-1">Гибкие сетки, которые адаптируются под контент.</p>
-            </div>
-          </motion.div>
+        {/* Место */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-muted-foreground text-sm uppercase tracking-widest mb-4">Место</p>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <Icon name="MapPin" size={18} className="text-primary" />
+            <h3 className="font-serif text-2xl md:text-3xl text-foreground">г. Сургут, ресторан Plum</h3>
+          </div>
+          <p className="text-muted-foreground">Набережный просп., 13/1</p>
+        </motion.div>
 
-          {/* Speed Card */}
-          <motion.div
-            className="bg-secondary rounded-xl p-8 min-h-[280px] flex flex-col"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            whileHover={{ scale: 0.98 }}
-            whileTap={{ scale: 0.96 }}
-            data-clickable
-          >
-            <div className="flex-1">
-              <SpeedIndicator />
-            </div>
-            <div className="mt-4">
-              <h3 className="font-serif text-xl text-foreground">Скорость</h3>
-              <p className="text-muted-foreground text-sm mt-1">Молниеносная загрузка страниц для ваших гостей.</p>
-            </div>
-          </motion.div>
+        {/* Фотографии ресторана */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {[
+            "/interior-design-minimalist-living-room-natural-lig.jpg",
+            "/architecture-firm-website-minimal.jpg",
+          ].map((src, i) => (
+            <motion.div
+              key={i}
+              className="rounded-2xl overflow-hidden aspect-[4/3] shadow-sm"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+            >
+              <img src={src} alt={`Ресторан Plum ${i + 1}`} className="w-full h-full object-cover" />
+            </motion.div>
+          ))}
         </div>
+
+        {/* Карта */}
+        <motion.div
+          className="rounded-2xl overflow-hidden shadow-sm"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?ll=73.397&spn=0.02,0.01&text=%D0%A1%D1%83%D1%80%D0%B3%D1%83%D1%82%2C+%D0%9D%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D1%8B%D0%B9+%D0%BF%D1%80%D0%BE%D1%81%D0%BF.+13%2F1&z=16&pt=73.397,61.25,pm2rdm"
+            width="100%"
+            height="400"
+            style={{ border: 0 }}
+            allowFullScreen
+            title="Ресторан Plum на карте"
+          />
+        </motion.div>
       </div>
     </section>
   )

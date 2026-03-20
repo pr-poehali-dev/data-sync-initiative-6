@@ -1,85 +1,42 @@
-import { motion } from "framer-motion"
-import { Check } from "lucide-react"
-
-const plans = [
-  {
-    name: "Старт",
-    price: "1 200",
-    period: " руб/мес",
-    description: "Для личного портфолио",
-    features: ["5 страниц", "Свой домен", "Базовая аналитика", "Поддержка по email"],
-  },
-  {
-    name: "Про",
-    price: "2 900",
-    period: " руб/мес",
-    description: "Для растущих авторов",
-    features: ["Безлимит страниц", "Приоритет поддержки", "Расширенная аналитика", "Свой брендинг", "Работа в команде"],
-    popular: true,
-  },
-]
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 
 export function PricingSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  const scale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1])
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+
   return (
-    <section className="bg-secondary px-6 py-24">
-      <div className="max-w-5xl mx-auto">
+    <section ref={containerRef} className="bg-secondary px-6 py-24 overflow-hidden">
+      <div className="max-w-3xl mx-auto">
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          className="relative rounded-3xl overflow-hidden shadow-2xl"
+          style={{ scale, opacity }}
         >
-          <h2 className="text-3xl md:text-5xl font-serif text-foreground">Простые и понятные цены</h2>
-          <p className="text-muted-foreground mt-4 max-w-md mx-auto">Начните бесплатно, платите когда готовы.</p>
+          <img
+            src="/Mbavt7_5Q7uii6AY5oqp1CCLkErmXA5FGPIIxFw_58b5M23L0_I0VHT8xyxeBnmL3HJsnXzUdhcYl1c_vkiECOsY.jpg"
+            alt="Константин и Ангелина"
+            className="w-full h-auto object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          <motion.div
+            className="absolute bottom-8 left-0 right-0 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <p className="font-serif text-white text-2xl md:text-4xl italic">
+              Константин & Ангелина
+            </p>
+            <p className="text-white/70 text-sm mt-2 tracking-widest uppercase">17 · 07 · 2026</p>
+          </motion.div>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={i}
-              className={`relative bg-background rounded-xl p-8 ticket-edge ${plan.popular ? "ring-2 ring-primary" : ""}`}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              data-clickable
-            >
-              {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-lime text-foreground text-xs font-medium px-3 py-1 rounded-full">
-                  Популярный
-                </span>
-              )}
-
-              <div className="text-center pb-6 border-b border-dashed border-border">
-                <h3 className="font-serif text-xl text-foreground">{plan.name}</h3>
-                <div className="mt-4 flex items-baseline justify-center gap-1">
-                  <span className="text-4xl md:text-5xl font-serif text-foreground">{plan.price}</span>
-                  <span className="text-muted-foreground">{plan.period}</span>
-                </div>
-                <p className="text-muted-foreground text-sm mt-2">{plan.description}</p>
-              </div>
-
-              <ul className="mt-6 space-y-3">
-                {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-center gap-3 text-foreground">
-                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                    <span className="text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className={`w-full mt-8 py-3 px-6 rounded-lg font-medium transition-colors ${
-                  plan.popular
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                    : "bg-secondary text-foreground hover:bg-accent/30"
-                }`}
-              >
-                Начать
-              </button>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   )

@@ -1,54 +1,81 @@
 import { motion } from "framer-motion"
 
-const portfolioItems = [
-  "/portfolio-website-design-preview-modern.jpg",
-  "/photography-portfolio-website-clean.jpg",
-  "/architecture-firm-website-minimal.jpg",
-  "/design-agency-portfolio-dark-theme.jpg",
-  "/artist-portfolio-website-creative.jpg",
-  "/writer-portfolio-website-elegant.jpg",
+const colors = [
+  { name: "Голубой", hex: "#BFDBFE", bg: "bg-blue-200" },
+  { name: "Жёлтый", hex: "#FEF08A", bg: "bg-yellow-200" },
+  { name: "Розовый", hex: "#FBCFE8", bg: "bg-pink-200" },
+  { name: "Серебристый", hex: "#E2E8F0", bg: "bg-slate-200" },
+  { name: "Бежевый", hex: "#E5D5B0", bg: "bg-amber-100" },
+  { name: "Зелёный", hex: "#BBF7D0", bg: "bg-green-200" },
 ]
 
 export function CarouselSection() {
-  // Duplicate for seamless loop
-  const items = [...portfolioItems, ...portfolioItems]
-
   return (
     <section className="bg-primary py-24 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 mb-12">
-        <motion.h2
-          className="text-3xl md:text-4xl font-serif text-primary-foreground"
+      <div className="max-w-4xl mx-auto px-6">
+        <motion.p
+          className="text-primary-foreground/70 text-sm uppercase tracking-widest mb-4 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Создано авторами для авторов.
-        </motion.h2>
-      </div>
-
-      <div className="relative">
-        <motion.div
-          className="flex gap-6"
-          animate={{ x: [0, "-50%"] }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          Пожелание
+        </motion.p>
+        <motion.h2
+          className="text-3xl md:text-5xl font-serif text-primary-foreground text-center mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
-          {items.map((src, i) => (
-            <div
+          Дресс-код
+        </motion.h2>
+        <motion.p
+          className="text-primary-foreground/80 text-center mb-16 font-light max-w-xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          Нам будет приятно, если вы поддержите стилистику нашей свадьбы и используете в ваших нарядах предложенные цвета
+        </motion.p>
+
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-6 justify-items-center">
+          {colors.map((color, i) => (
+            <motion.div
               key={i}
-              className="flex-shrink-0 w-[300px] md:w-[400px] rounded-xl overflow-hidden shadow-2xl"
-              data-clickable
+              className="flex flex-col items-center gap-3"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              <img
-                src={src || "/placeholder.svg"}
-                alt={`Пример портфолио ${(i % portfolioItems.length) + 1}`}
-                className="w-full h-auto"
+              <div
+                className={`w-14 h-14 md:w-16 md:h-16 rounded-full ${color.bg} shadow-md border-2 border-white/50`}
+                style={{ backgroundColor: color.hex }}
               />
-            </div>
+              <span className="text-primary-foreground/80 text-xs text-center">{color.name}</span>
+            </motion.div>
           ))}
+        </div>
+
+        {/* Пожелания */}
+        <motion.div
+          className="mt-20 max-w-2xl mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-primary-foreground text-sm uppercase tracking-widest mb-6">Пожелания</p>
+          <p className="text-primary-foreground/90 font-serif text-xl md:text-2xl leading-relaxed mb-8">
+            Чтобы наши руки были свободны для объятий, будем рады подаркам в конвертах.
+          </p>
+          <div className="flex justify-center gap-1 mb-8 text-3xl">
+            <span>💗</span>
+            <span className="text-2xl">💕</span>
+          </div>
+          <p className="text-primary-foreground/80 font-light">
+            Будем благодарны вам за сохранение уютного семейного вечера и отсутствия криков «Горько!»
+          </p>
         </motion.div>
       </div>
     </section>

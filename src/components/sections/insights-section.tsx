@@ -1,100 +1,103 @@
-import type React from "react"
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-
-const articles = [
-  {
-    title: "Искусство визуального сторителлинга",
-    category: "Дизайн",
-    image: "/visual-storytelling-design-article.jpg",
-  },
-  {
-    title: "Как создать личный бренд онлайн",
-    category: "Стратегия",
-    image: "/personal-branding-digital-marketing.jpg",
-  },
-  {
-    title: "Тренды типографики 2025",
-    category: "Типографика",
-    image: "/typography-trends-modern-fonts.jpg",
-  },
-  {
-    title: "Минимализм в дизайне портфолио",
-    category: "Вдохновение",
-    image: "/placeholder.svg?height=200&width=300",
-  },
-]
+import { motion } from "framer-motion"
+import Icon from "@/components/ui/icon"
 
 export function InsightsSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePosition({ x: e.clientX, y: e.clientY })
-  }
+  const [surveyLink, setSurveyLink] = useState("")
 
   return (
-    <section className="bg-background px-6 py-24" onMouseMove={handleMouseMove}>
-      <div className="max-w-4xl mx-auto">
+    <section className="bg-background px-6 py-24">
+      <div className="max-w-2xl mx-auto text-center">
         <motion.p
-          className="text-muted-foreground text-sm uppercase tracking-widest mb-8"
+          className="text-muted-foreground text-sm uppercase tracking-widest mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Статьи
+          Просьба ответить до 01.06.2026
+        </motion.p>
+        <motion.h2
+          className="font-serif text-3xl md:text-5xl text-foreground mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Анкета гостя
+        </motion.h2>
+        <motion.p
+          className="text-muted-foreground mb-12 font-light"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          Ваши ответы на вопросы помогут нам при организации торжества. Будем ждать ответ до 01.06.2026.
         </motion.p>
 
-        <div className="divide-y divide-border">
-          {articles.map((article, i) => (
-            <motion.a
-              key={i}
-              href="#"
-              className="group flex items-center justify-between py-6 relative"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{ paddingLeft: 16, paddingRight: 16 }}
-              data-clickable
-            >
-              <div className="flex-1">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">{article.category}</span>
-                <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
-              </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-            </motion.a>
-          ))}
-        </div>
+        <motion.div
+          className="bg-secondary rounded-3xl p-8 shadow-sm"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <Icon name="ClipboardList" size={20} className="text-primary" />
+            <p className="font-serif text-xl text-foreground">Заполнить анкету</p>
+          </div>
 
-        {/* Floating hover image */}
-        <AnimatePresence>
-          {hoveredIndex !== null && (
-            <motion.div
-              className="fixed pointer-events-none z-50 w-[200px] md:w-[300px] rounded-lg overflow-hidden shadow-2xl hidden md:block"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                x: mousePosition.x + 20,
-                y: mousePosition.y - 100,
-              }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.2 }}
+          {surveyLink ? (
+            <a
+              href={surveyLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-2xl hover:bg-primary/90 transition-colors font-medium text-lg"
             >
-              <img
-                src={articles[hoveredIndex].image || "/placeholder.svg"}
-                alt={articles[hoveredIndex].title}
-                className="w-full h-auto"
-              />
-            </motion.div>
+              <Icon name="ExternalLink" size={18} />
+              Открыть анкету
+            </a>
+          ) : (
+            <div className="space-y-4">
+              <p className="text-muted-foreground text-sm">Ссылка на анкету ещё не добавлена</p>
+              <div className="bg-background rounded-xl p-4 border border-dashed border-border">
+                <p className="text-xs text-muted-foreground mb-3">Вставьте ссылку на Google Forms или другой опрос:</p>
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={surveyLink}
+                    onChange={(e) => setSurveyLink(e.target.value)}
+                    placeholder="https://forms.google.com/..."
+                    className="flex-1 bg-secondary border-0 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <button
+                    className="bg-primary text-primary-foreground px-4 py-3 rounded-xl hover:bg-primary/90 transition-colors text-sm"
+                    onClick={() => {}}
+                  >
+                    Сохранить
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
-        </AnimatePresence>
+        </motion.div>
+
+        <motion.p
+          className="mt-16 font-serif text-2xl md:text-3xl text-primary italic"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Будем ждать вас!
+        </motion.p>
+        <motion.p
+          className="mt-3 text-muted-foreground font-light"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          С любовью, Константин и Ангелина
+        </motion.p>
       </div>
     </section>
   )
